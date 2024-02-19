@@ -10,30 +10,56 @@ namespace KodlamaIO.DataAccess.Concreate
 {
     public class InstructorDal : IInstructorDal
     {
-        public void Add(Instructor entity)
-        {
-            throw new NotImplementedException();
-        }
+        private List<Instructor> _instructors;
 
-
-        public void Delete(int id)
+        public InstructorDal()
         {
-            throw new NotImplementedException();
+
+            _instructors = new List<Instructor>
+            {
+                new Instructor { Id = 1, Name = "Pelin",Surname = "Coşkun" },
+                new Instructor { Id = 2, Name = "İzel", Surname = "Coşkun" },
+                new Instructor { Id = 3, Name = "Ece", Surname = "Coşkun" }
+            };
         }
 
         public List<Instructor> GetAll()
         {
-            throw new NotImplementedException();
+            foreach (var instructor in _instructors)
+            {
+                Console.WriteLine($"ID: {instructor.Id}, Adı: {instructor.Name}, Soyadı: {instructor.Surname}");
+            }
+
+            return _instructors;
         }
 
         public Instructor GetById(int id)
         {
-            throw new NotImplementedException();
+            return _instructors.FirstOrDefault(i => i.Id == id);
         }
 
-        public void Update(Instructor entity)
+        public void Add(Instructor instructor)
         {
-            throw new NotImplementedException();
+            _instructors.Add(instructor);
+        }
+
+        public void Update(Instructor instructor)
+        {
+            Instructor instructorToUpdate = _instructors.FirstOrDefault(i => i.Id == instructor.Id);
+            if (instructorToUpdate != null)
+            {
+                instructorToUpdate.Name = instructor.Name;
+                instructorToUpdate.Surname = instructor.Surname;
+            }
+        }
+
+        public void Delete(int id)
+        {
+            Instructor instructorToDelete = _instructors.FirstOrDefault(i => i.Id == id);
+            if (instructorToDelete != null)
+            {
+                _instructors.Remove(instructorToDelete);
+            }
         }
     }
 }
