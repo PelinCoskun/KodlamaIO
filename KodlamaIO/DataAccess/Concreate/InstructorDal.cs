@@ -15,7 +15,8 @@ namespace KodlamaIO.DataAccess.Concreate
             throw new NotImplementedException();
         }
 
-        public void Delete(Instructor entity)
+
+        public void Delete(int id)
         {
             throw new NotImplementedException();
         }

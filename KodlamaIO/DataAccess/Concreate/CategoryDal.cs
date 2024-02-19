@@ -10,29 +10,56 @@ namespace KodlamaIO.DataAccess.Concreate
 {
     public class CategoryDal : ICategoryDal
     {
-        public void Add(Category entity)
-        {
-            throw new NotImplementedException();
-        }
+        private List<Category> _categories;
 
-        public void Delete(Category entity)
+        public CategoryDal()
         {
-            throw new NotImplementedException();
+
+            _categories = new List<Category>
+            {
+                new Category { Id = 1, Name = "Category 1" },
+                new Category { Id = 2, Name = "Category 2" },
+                new Category { Id = 3, Name = "Category 3" }
+            };
         }
 
         public List<Category> GetAll()
         {
-            throw new NotImplementedException();
+            foreach (var category in _categories)
+            {
+                Console.WriteLine($"Kategori Adı: {category.Name}");
+            }
+
+            return _categories;
         }
 
         public Category GetById(int id)
         {
-            throw new NotImplementedException();
+            return _categories.FirstOrDefault(c => c.Id == id);
         }
 
-        public void Update(Category entity)
+        public void Add(Category category)
         {
-            throw new NotImplementedException();
+            _categories.Add(category);
         }
+
+        public void Update(Category category)
+        {
+            Category categoryToUpdate = _categories.FirstOrDefault(c => c.Id == category.Id);
+            if (categoryToUpdate != null)
+            {
+                categoryToUpdate.Name = category.Name;
+            }
+        }
+
+        public void Delete(int id)
+        {
+            Category categoryToDelete = _categories.FirstOrDefault(c => c.Id == id);
+            if (categoryToDelete != null)
+            {
+                _categories.Remove(categoryToDelete);
+            }
+        }
+
     }
 }

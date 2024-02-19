@@ -1,4 +1,4 @@
-﻿,using KodlamaIO.DataAccess.Abstract;
+﻿using KodlamaIO.DataAccess.Abstract;
 using KodlamaIO.Entities;
 using System;
 using System.Collections.Generic;
@@ -10,29 +10,59 @@ namespace KodlamaIO.DataAccess.Concreate
 {
     public class CourseDal : ICourseDal
     {
-        public void Add(Course entity)
+        private List<Course> _courses;
+
+        public CourseDal()
         {
-            throw new NotImplementedException();
+
+            _courses = new List<Course>
+            {
+                new Course { Id = 1, Name = "Course 1", Description = "Description 1", CategoryId = 1, InstructorId = 1 },
+                new Course { Id = 2, Name = "Course 2", Description = "Description 2",  CategoryId = 2, InstructorId = 2 },
+                new Course { Id = 3, Name = "Course 3", Description = "Description 3", CategoryId = 3, InstructorId = 3 }
+            };
         }
 
-        public void Delete(Course entity)
+        public void Add(Course course)
         {
-            throw new NotImplementedException();
+            _courses.Add(course);
+        }
+
+        public void Delete(int id)
+        {
+            Course courseToDelete = _courses.FirstOrDefault(c => c.Id == id);
+            if (courseToDelete != null)
+            {
+                _courses.Remove(courseToDelete);
+            }
         }
 
         public List<Course> GetAll()
         {
-            throw new NotImplementedException();
+            foreach (var course in _courses)
+            {
+                Console.WriteLine($"Kurs Adı: {course.Name}, Açıklama: {course.Description}");
+            }
+
+            return _courses;
         }
 
         public Course GetById(int id)
         {
-            throw new NotImplementedException();
+            return _courses.FirstOrDefault(c => c.Id == id);
         }
 
-        public void Update(Course entity)
+        public void Update(Course course)
         {
-            throw new NotImplementedException();
+            Course courseToUpdate = _courses.FirstOrDefault(c => c.Id == course.Id);
+            if (courseToUpdate != null)
+            {
+                // Özelliklerini güncelliyoruz
+                courseToUpdate.Name = course.Name;
+                courseToUpdate.Description = course.Description;
+                courseToUpdate.CategoryId = course.CategoryId;
+                courseToUpdate.InstructorId = course.InstructorId;
+            }
         }
     }
 }

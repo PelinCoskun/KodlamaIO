@@ -9,8 +9,8 @@ namespace KodlamaIO.Entities
     public class Course:BaseEntity
     {
         public string Description { get; set; }
-      public Category Category { get; set; }
-        public Instructor Instructor { get; set; }
+      public int CategoryId { get; set; }
+        public int InstructorId { get; set; }
 
     }
 }
