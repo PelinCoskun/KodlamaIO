@@ -1,4 +1,5 @@
-﻿using System;
+﻿using KodlamaIO.Entities;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -6,7 +7,7 @@ using System.Threading.Tasks;
 
 namespace KodlamaIO.DataAccess.Abstract
 {
-    public class IInstructorDal
+    public interface IInstructorDal : IGenericDal<Instructor>
     {
     }
 }
